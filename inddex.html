@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zheng Store</title>
+    <style>
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui, sans-serif;}
+body{
+    background:url("https://i.imgur.com/TGtOmFX.png");
+    background-size:cover; /*铺满整个屏幕*/
+    background-attachment:fixed; /*滚动页面时背景固定不动*/
+    color:#fff;
+    padding:8px;
+}
+
+/*头部banner*/
+.banner{text-align:center;padding:25px 10px;background:#fff;border-radius:8px;margin-bottom:20px;}
+.banner h1{color:#000;font-size:42px;margin-bottom:10px;}
+.banner .tip{background:#000;color:#ffffff;padding:8px 20px;border-radius:20px;display:inline-block;font-size:14px;}
+.notice{background:#ffe9b0;color:#704c00;padding:10px;border-radius:6px;text-align:center;margin:18px 0;font-size:14px;}
+
+/*订单卡片网格 新增width:100%*/
+.card-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+    margin-bottom:25px;
+    width:100%;
+}
+.order-card{
+    border:3px solid #fff;
+    border-radius:10px;
+    padding:16px;
+    background:#000;
+    width:100%;
+}
+.card-title{background:#94c0ff;color:#000;text-align:center;padding:8px;border-radius:6px;font-weight:bold;margin-bottom:14px;font-size:16px;}
+.price-text{text-align:center;margin-bottom:10px;font-size:14px;color:#ddd;}
+select, input, textarea{width:100%;padding:9px;border-radius:5px;border:none;margin:8px 0;font-size:15px;}
+.add-cart{width:100%;padding:9px;background:#f5a8c0;color:#000;border:none;border-radius:5px;font-weight:bold;cursor:pointer;margin-top:6px;}
+.warn-text{font-size:12px;color:#ff7777;margin-top:8px;line-height:1.5;}
+
+/*购物车区域*/
+.cart-box{background:#fff;color:#222;border-radius:10px;padding:18px;margin:20px 0;}
+table{width:100%;border-collapse:collapse;margin-bottom:15px;}
+th,td{border:1px solid #999;padding:8px;text-align:center;font-size:14px;}
+th{background:#4285f4;color:#fff;}
+.del-btn{background:#f47290;color:white;border:none;padding:5px 10px;border-radius:4px;cursor:pointer;}
+.price-sum{text-align:center;font-size:18px;margin:12px 0;color:#e63960;font-weight:bold;}
+
+/*顾客&付款表单*/
+.form-area{margin:20px 0;}
+.form-area input, .form-area textarea{border:1px solid #888;background:#fff;color:#222;}
+.pay-box{background:#fff3bc;padding:18px;border-radius:8px;margin-top:20px;color:#222;}
+.qr-wrap{border:2px solid #4285f4;border-radius:8px;background:white;padding:15px;text-align:center;margin:15px 0;}
+.qr-wrap img{max-width:100%;height:auto;}
+.copy-btn{width:100%;padding:10px;background:#2483ed;color:white;border:none;border-radius:6px;margin:8px 0;cursor:pointer;font-weight:bold;font-size:16px;}
+
+/*全局所有图片自适应*/
+img{
+    max-width:100%;
+    height:auto;
+    display:block;
+}
+
+/*移动端适配 更高优先级选择器*/
+@media (max-width:768px){
+    body .card-grid{
+        grid-template-columns: 1fr !important;
+    }
+    .container{padding:12px; border-width:3px;}
+    .banner h1{font-size:32px;}
+    #cartTable{display:block; overflow-x:auto;}
+    body{padding:4px;}
+}  
+
+</style>
+</head>
+<body>
+<div class="container">
+    <!--顶部banner-->
+    <div class="banner">
+        <h1>Zheng Store 充值店铺</h1>
+        <div class="tip">效率！服务！售后！</div>
+    </div>
+
+    <div class="notice">营业时间: 24 小时 | FB : Zheng Store | 售后联系Whatsapp : 0193140621</div>
+
+    <div class="card-grid">
+        <div class="order-card">
+            <div class="card-title">王者荣耀 双系统</div>
+            <div class="price-text">价格: RM 1 – RM 785</div>
+            <select class="sel-item">
+                <option data-price="1">10点券 – RM 1</option>
+                <option data-price="4.5">60点券 – RM 4.5</option>
+                <option data-price="12">180点券 – RM 12</option>
+                <option data-price="20">300点券 – RM 20</option>
+                <option data-price="30">450点券 苹果 – RM 30</option>
+                <option data-price="73">1180点券 – RM 73</option>
+                <option data-price="120">1980点券 – RM 120</option>
+                <option data-price="210">3480点券 – RM 210</option>
+                <option data-price="388">6480点券 – RM 388</option>
+                <option data-price="545">8980点券 – RM 545</option>
+                <option data-price="785">12980点券 – RM 785</option>
+            </select>
+            <input type="number" value="1" min="1" class="numInput">
+            <button class="add-cart" onclick="pushCart(this,'王者荣耀')">加入购物车</button>
+        </div>
+
+        <div class="order-card">
+            <div class="card-title">和平精英 安卓</div>
+            <div class="price-text">价格: RM 1 – RM 785</div>
+            <select class="sel-item">
+                <option data-price="1">10点券 – RM 1</option>
+                <option data-price="4.5">60点券 – RM 4.5</option>
+                <option data-price="12.5">特权卡/精英卡 – RM 12.5</option>
+                <option data-price="20">316点券 – RM 20</option>
+                <option data-price="43">718点券 – RM 43</option>
+                <option data-price="80">1368点券 – RM 80</option>
+                <option data-price="122">2118点券 – RM 122</option>
+                <option data-price="203">3548点券 – RM 203</option>
+                <option data-price="392">7048点券 – RM 392</option>
+                <option data-price="545">8980点券 – RM 545</option>
+                <option data-price="785">12980点券 – RM 785</option>
+            </select>
+            </select>
+            <input type="number" value="1" min="1" class="numInput">
+            <button class="add-cart" onclick="pushCart(this,'和平精英 安卓')">加入购物车</button>
+        </div>
+
+        <div class="order-card">
+            <div class="card-title">和平精英 苹果</div>
+            <div class="price-text">价格：RM 1 – RM785</div>
+            <select class="sel-item">
+                <option data-price="1">10点券 – RM 1</option>
+                <option data-price="4.5">60点券 – RM 4.5</option>
+                <option data-price="12.5">特权卡/精英卡 – RM 12.5</option>
+                <option data-price="19">316点券 – RM 19</option>
+                <option data-price="41">718点券 – RM 41</option>
+                <option data-price="75">1368点券 – RM 75</option>
+                <option data-price="116">2118点券 – RM 116</option>
+                <option data-price="193">3548点券 – RM 193</option>
+                <option data-price="378">7048点券 – RM 378</option>
+                <option data-price="545">8980点券 – RM 545</option>
+                <option data-price="785">12980点券 – RM 785</option>
+            </select>
+            <input type="number" value="1" min="1" class="numInput">
+            <button class="add-cart" onclick="pushCart(this,'和平精英 苹果')">加入购物车</button>
+<div class="warn-text">*正常挡位可无限叠加<br>*需要双设备扫码</div>
+        </div>
+
+        <div class="order-card">
+            <div class="card-title">无畏契约手游</div>
+            <div class="price-text">大额福利更多</div>
+            <select class="sel-item">
+                <option data-price="4.5">60点券 – RM 4.5</option>
+                <option data-price="7">100点券 – RM 7</option>
+                <option data-price="12.5">先行卡 – RM 12.5</option>
+                <option data-price="20">316点券 – RM 20</option>
+                <option data-price="32">526点券 – RM 32</option>
+                <option data-price="43">718点券 – RM 43</option>
+                <option data-price="79">1318点券 – RM 79</option>
+                <option data-price="119">2060点券 – RM 119</option>
+                <option data-price="125">2136点券 – RM 125</option>
+                <option data-price="197">3518点券 – RM 197</option>
+                <option data-price="308">5618点券 – RM 308</option>
+                <option data-price="385">7218点券 – RM 385</option>
+                <option data-price="62">小黑卡 到账980点券 – RM62</option>
+            </select>
+            <input type="number" value="1" min="1" class="numInput">
+            <button class="add-cart" onclick="pushCart(this,'无畏契约')">加入购物车</button>
+            <div class="warn-text">*该点券价位均视为可上号<br>*先行卡不用上号<br>*充值无畏契约都需要双设备扫码</div>
+        </div>
+
+        <div class="order-card">
+            <div class="card-title">定制服务</div>
+            <div class="price-text">其他服务</div>
+            <select class="sel-item">
+                <option data-price="999">抖音钻石 10-10000钻石  私聊自定义</option>
+                <option data-price="999">快手币 10-10000币  私聊自定义</option>
+                <option data-price="999">支付宝/微信  换汇率  私聊自定义</option>
+                <option data-price="999">QQ币 1-10000币  私聊自定义</option>
+                <option data-price="999">淘宝代付</option>
+                <option data-price="999">中国区苹果卡  6-1000元  私聊自定义</option>
+                <option data-price="999">代购和平服装 私聊问价</option>
+            </select> 
+            <input type="number" value="1" min="1" class="numInput">
+            <button class="add-cart" onclick="pushCart(this,'定制服务')">加入购物车</button>
+        </div>
+
+        <div class="order-card">
+            <div class="card-title">和平代送</div>
+            <div class="price-text">代送和平服装/道具</div>
+            <select class="sel-item">
+                <option data-price="130">960碎片 截图皮肤 – RM 130</option>
+                <option data-price="246">安卓/苹果 3个枪械升级徽章 – RM 246</option>
+                <option data-price="486">安卓/苹果 6个枪械升级徽章 – RM 486</option>
+                <option data-price="720">安卓/苹果 9个枪械升级徽章 – RM 720</option>
+                <option data-price="363">苹果 1个车币 – RM 363</option>
+                <option data-price="358">安卓 1个车币 – RM 358</option>
+                <option data-price="1110">苹果 3个车币 – RM 1110</option>
+                <option data-price="1100">安卓 3个车币 – RM 1100</option>
+            </select>
+            <input type="number" value="1" min="1" class="numInput">
+            <button class="add-cart" onclick="pushCart(this,'和平代送')">加入购物车</button>
+        </div>
+    </div>
+
+    <!--购物车模块-->
+    <div class="cart-box">
+        <h3 style="text-align:center;margin-bottom:12px;color:#222">购物车</h3>
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>分类</th>
+                    <th>类型</th>
+                    <th>单价 RM</th>
+                    <th>数量</th>
+                    <th>小计 RM</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody id="cartBody">
+            </tbody>
+        </table>
+        <div class="price-sum">订单总价: RM <span id="totalOriginal">0.00</span></div>
+
+        <!--顾客资料-->
+        <h4 style="text-align:center;margin:15px 0 8px">顾客资料</h4>
+        <div class="form-area">
+            <input id="inputName" type="text" placeholder="请输入姓名">
+            <input id="inputPhone" type="tel" placeholder="请输入电话号码 方便售后">
+            <textarea id="inputRemark" rows="4" placeholder="备注 / 特别要求"></textarea>
+        </div>
+
+        <button class="copy-btn" onclick="copyOrderInfo()">复制全部订单信息</button>
+
+        <div class="pay-box">
+            <h4 style="text-align:center;margin-bottom:10px">付款资料</h4>
+            <p style="text-align:center;font-size:14px">填写完资料后扫码付款</p>
+            <div class="qr-wrap">
+                <p>Touch 'n Go eWallet</p>
+                <img src="https://i.imgur.com/msECkwn.png" width="500" style="margin:20px 0;">
+                <p style="font-size:12px;margin-top:8px">任何电子钱包实体银行都能扫</p>
+            </div>
+            <p style="text-align:center;margin:8px 0">收款人：WONG MING ZHENG</p>
+            <p style="text-align:center;margin-bottom:12px">电话号码：0178513231</p>
+            <p style="text-align:center;margin-bottom:12px">定制服务：0193140621</p>
+            <input id="payName" type="text" placeholder="付款人姓名">
+        </div>
+    </div>
+</div>
+
+<script>
+// 购物车存储数组
+let cartList = [];
+const cartBody = document.getElementById('cartBody');
+const totalOriginalText = document.getElementById('totalOriginal');
+
+// 添加商品到购物车
+function pushCart(btn, category) {
+    const cardWrap = btn.parentElement;
+    const sel = cardWrap.querySelector('.sel-item');
+    const numInput = cardWrap.querySelector('.numInput');
+    const selectedOption = sel.options[sel.selectedIndex];
+    const price = parseFloat(selectedOption.dataset.price);
+    const itemName = selectedOption.innerText;
+    const count = parseInt(numInput.value) || 1;
+
+    if (price <= 0) {
+        alert("请先选择有效商品类型！");
+        return;
+    }
+    const subtotal = (price * count).toFixed(2);
+    cartList.push({
+        cate: category,
+        name: itemName,
+        price: price,
+        num: count,
+        sub: subtotal
+    });
+    renderCart();
+}
+
+// 渲染购物车表格 + 计算总价
+function renderCart() {
+    cartBody.innerHTML = "";
+    let total = 0;
+    cartList.forEach((item, idx) => {
+        total += item.price * item.num;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td>${item.cate}</td>
+            <td>${item.name}</td>
+            <td>${item.price.toFixed(2)}</td>
+            <td>${item.num}</td>
+            <td>${item.sub}</td>
+            <td><button class="del-btn" onclick="delItem(${idx})">删除</button></td>
+        `;
+        cartBody.appendChild(tr);
+    });
+    // 更新总价
+    totalOriginalText.innerText = total.toFixed(2);
+}
+
+// 删除单条商品
+function delItem(index) {
+    cartList.splice(index, 1);
+    renderCart();
+}
+
+// 一键复制全部订单+顾客资料到剪贴板（手机/电脑通用）
+async function copyOrderInfo() {
+    const name = document.getElementById('inputName').value.trim();
+    const phone = document.getElementById('inputPhone').value.trim();
+    const remark = document.getElementById('inputRemark').value.trim();
+    const payName = document.getElementById('payName').value.trim();
+    let totalPrice = document.getElementById('totalOriginal').innerText;
+
+    // 拼接订单文本
+    let copyText = "=Zheng Store充值订单=\n";
+    copyText += `顾客姓名：${name || '未填写'}\n`;
+    copyText += `联系电话：${phone || '未填写'}\n`;
+    copyText += `备注要求：${remark || '无'}\n`;
+    copyText += `付款人姓名：${payName || '未填写'}\n\n`;
+    copyText += "订单商品清单：\n";
+    if(cartList.length === 0){
+        copyText += "暂无商品\n";
+    }else{
+        cartList.forEach(item => {
+            copyText += `【${item.cate}】${item.name} ×${item.num} 小计RM${item.sub}\n`;
+        })
+    }
+    copyText += `\n订单总价：RM${totalPrice}`;
+
+    // 执行复制
+    try {
+        await navigator.clipboard.writeText(copyText);
+        alert("订单信息复制成功！可以直接粘贴发送");
+    } catch (err) {
+
+        const tempInput = document.createElement('textarea');
+        tempInput.value = copyText;
+        document.body.appendChild(tempInput);
+        tempInput.select();
+        document.execCommand('copy');
+        document.body.removeChild(tempInput);
+        alert("订单信息复制成功！");
+    }
+}
+
+// 页面初始化渲染购物车
+renderCart();
+</script>
+</body>
+</html>
