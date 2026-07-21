@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zheng Store - 在线点单</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+ background: url('https://i.imgur.com/TGtOmFX.png') no-repeat center center fixed;
+    background-size: cover;
+            background-color: #f8f9fa;
+            padding: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .menu-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .menu-item:last-child {
+            border-bottom: none;
+        }
+        .item-info h3 {
+            font-size: 16px;
+            color: #222;
+        }
+        .item-info p {
+            font-size: 14px;
+            color: #666;
+        }
+        .item-price {
+            font-weight: bold;
+            color: #388E3C;
+        }
+
+       .add-btn {
+       background-color: #ffb6c1 !important; 
+      color: black !important; 
+      border: 2px solid black !important; 
+      padding: 8px 14px !important;
+      font-size: 14px !important;
+      border-radius: 5px !important;
+      cursor: pointer !important;
+      }
+     .discount-tag{
+    display: inline-block !important;
+    color: #E53935 !important;
+    font-size: 12px !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    margin-left: 1px !important;
+        }
+        .cart-section {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+        }
+        .total {
+            font-weight: bold;
+            margin-top: 10px;
+            font-size: 18px;
+        }
+        .checkout-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .customer-info input {
+            width: 100%;
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Zheng Store</h1>
+        <p>营业时间: 24 小时 | FB : Zheng Store | 售后联系Whatsapp : 0193140621</p >
+    </header>
+
+    <div class="menu-section">
+        <h2>王者荣耀点券 双系统</h2>
+        <div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀10点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 1</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀10点券', 1)">+</button>
+        </div>
+
+        <div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀60点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 4.5</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀60点券', 4.5)">+</button>
+        </div>
+
+  <div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀180点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 12.5</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀180点券', 12.5)">+</button>
+        </div>
+
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀300点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 20</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀300点券', 20)">+</button>
+        </div>
+    
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀680点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 43</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀680点券', 43)">+</button>
+        </div>
+
+    <div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀1180点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 73</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀1180点券', 73)">+</button>
+        </div>
+
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀1980点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 120</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀1980点券', 121)">+</button>
+        </div>
+   
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀3480点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 210</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀3480点券', 210)">+</button>
+        </div>
+
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀6480点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 388</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀6480点券', 388)">+</button>
+        </div>
+
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀8980点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 542</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀8980点券', 542)">+</button>
+        </div>
+
+<div class="menu-item">
+            <div class="item-info">
+                <h3>王者荣耀12980点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 785</span>
+            <button class="add-btn" onclick="addToCart('王者荣耀12980点券',785 )">+</button>
+        </div>
+
+    </div>
+
+    <div class="menu-section">
+        <h2>和平精英点券  自行叠加</h2>
+        <div class="menu-item">
+          
+  <div class="item-info">
+                <h3>和平精英10点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 1</span>
+            <button class="add-btn" onclick="addToCart('和平精英10点券', 1)">+</button>
+        </div>
+
+ <div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英60点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 4.5</span>
+            <button class="add-btn" onclick="addToCart('和平精英60点券', 4.5)">+</button>
+        </div>
+
+ <div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英300点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 20</span>
+            <button class="add-btn" onclick="addToCart('和平精英300点券安卓', 20)">+</button>
+        </div>
+
+ <div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英316点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 18</span>
+            <button class="add-btn" onclick="addToCart('和平精英300点券苹果', 18)">+</button>
+        </div>
+
+ <div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英680点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 43</span>
+            <button class="add-btn" onclick="addToCart('和平精英718点券安卓', 43)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英718点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 38</span>
+            <button class="add-btn" onclick="addToCart('和平精英718点券 苹果', 38)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英1280点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 79</span>
+            <button class="add-btn" onclick="addToCart('和平精英718点券 安卓', 79)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英1368点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 72</span>
+            <button class="add-btn" onclick="addToCart('和平精英1368点券 苹果', 72)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英1980点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 120</span>
+            <button class="add-btn" onclick="addToCart('和平精英1980点券 安卓', 120)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英2118点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 108</span>
+            <button class="add-btn" onclick="addToCart('和平精英2118点券 苹果', 108)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英3280点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 199</span>
+            <button class="add-btn" onclick="addToCart('和平精英3280点券 安卓', 199)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英3548点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 174</span>
+            <button class="add-btn" onclick="addToCart('和平精英3548点券 苹果', 174)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英6480点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 393</span>
+            <button class="add-btn" onclick="addToCart('和平精英6480点券 安卓', 393)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英7048点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 345</span>
+            <button class="add-btn" onclick="addToCart('和平精英7048点券 苹果', 345)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英9768点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 545</span>
+            <button class="add-btn" onclick="addToCart('和平精英9768点券 安卓', 545)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英9768点券 苹果</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 545</span>
+            <button class="add-btn" onclick="addToCart('和平精英9768点券 苹果', 545)">+</button>
+        </div>
+
+<div class="menu-item">
+ <div class="item-info">
+                <h3>和平精英14118点券 安卓</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 785</span>
+            <button class="add-btn" onclick="addToCart('和平精英14118点券 安卓', 785)">+</button>
+        </div>
+</div>
+ 
+   <div class="menu-section">
+        <h2>无畏契约手游点券</h2>
+        
+<div class="menu-item">  
+  <div class="item-info">
+                <h3>无畏契约60点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 4.5</span>
+            <button class="add-btn" onclick="addToCart('无畏契约60点券', 4.5)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约100点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 7</span>
+            <button class="add-btn" onclick="addToCart('无畏契约100点券', 7)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约308点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 20</span>
+            <button class="add-btn" onclick="addToCart('无畏契约308点券', 20)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约700点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 43</span>
+            <button class="add-btn" onclick="addToCart('无畏契约700点券', 43)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约1318点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 79</span>
+            <button class="add-btn" onclick="addToCart('无畏契约1318点券', 79)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约2060点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 119</span>
+            <button class="add-btn" onclick="addToCart('无畏契约2060点券', 119)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约3518点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 199</span>
+            <button class="add-btn" onclick="addToCart('无畏契约3518点券', 199)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约7218点券</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 395</span>
+            <button class="add-btn" onclick="addToCart('无畏契约7218点券', 395)">+</button>
+        </div>
+
+<div class="menu-item">
+<div class="item-info">
+                <h3>无畏契约 先行卡 需扫码充值</h3>
+                <p></p >
+            </div>
+            <span class="item-price">RM 12.5</span>
+            <button class="add-btn" onclick="addToCart('无畏契约 先行卡', 12.5)">+</button>
+        </div>
+</div>
+
+
+    <div class="cart-section">
+        <h2>🛒 你的订单</h2>
+        <div id="cart-items"></div>
+        <div class="total">总计: RM <span id="total-price">0.00</span></div>
+    </div>
+  </div>
+
+    <div class="menu-section customer-info">
+        <h3>请填写你的信息</h3>
+        <input type="text" id="customer-name" placeholder="游戏名字" required>
+        <input type="tel" id="customer-phone" placeholder="联系电话（方便售后/退款）" required>
+        <input type="text" id="customer-address" placeholder="安卓/苹果" required>
+    </div>
+  </div>
+
+<div class="menu-section">
+  <h3>💳 付款方式</h3>
+  <p>转账/Touch ‘n Go/</p >
+  <img src="https://i.imgur.com/msECkwn.png" width="300" style="margin:10px 0;">
+  <p>账号: <strong>0178513231</strong></p >
+  <p>提醒: <strong>转账后请截图+提交订单后把资料发给我</strong></p >
+</div>
+
+    <button class="checkout-btn" onclick="submitOrder()">提交订单</button>
+
+<script>
+let cart = [];
+let total = 0;
+
+function addToCart(name, price) {
+    let find = cart.find(x => x.name === name);
+    if(find){
+        find.qty++;
+        total += price;
+    }else{
+        cart.push({name,price,qty:1});
+        total += price;
+    }
+    updateCart();
+}
+
+function updateCart() {
+    let wrap = document.getElementById("cart-items");
+    wrap.innerHTML = "";
+    cart.forEach((item,i)=>{
+        wrap.innerHTML += `
+        <div class="cart-item">
+            <span>${item.name} x${item.qty}</span>
+            <span>RM ${(item.price * item.qty).toFixed(2)}</span>
+            <button onclick="removeFromCart(${i})">-</button>
+        </div>
+        `;
+    })
+    document.getElementById("total-price").innerText = total.toFixed(2);
+}
+
+function removeFromCart(idx){
+    total -= cart[idx].price * cart[idx].qty;
+    cart.splice(idx,1);
+    updateCart();
+}
+
+const FORMS_ID = "M8i32yK5FM";
+
+function submitOrder() {
+    const name = document.getElementById('customer-name').value;
+    const phone = document.getElementById('customer-phone').value;
+    const address = document.getElementById('customer-address').value;
+
+    if (!name || !phone || !address || cart.length === 0) {
+        alert('请填写完整信息并选择商品！');
+        return;
+    }
+
+    let orderItems = cart.map(item => 
+        `${item.name} x${item.qty} = RM ${(item.price * item.qty).toFixed(2)}`
+    ).join("\n");
+
+    let totalPrice = cart.reduce((s,item)=> s + item.price * item.qty, 0).toFixed(2);
+
+    let orderText = `
+=== 新订单 ===
+游戏名字: ${name}
+联系方式: ${phone}
+安卓/苹果: ${address}
+
+订单内容:
+${orderItems}
+
+订单总额: RM ${totalPrice}
+    `;
+
+    navigator.clipboard.writeText(orderText.trim()).then(()=>{
+        alert("订单已复制！\n请提交表单或直接发给我。");
+    })
+
+}
+</script>
+
+   </body>
+</html>
