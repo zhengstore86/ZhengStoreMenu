@@ -230,9 +230,9 @@ img{
         <!--顾客资料-->
         <h4 style="text-align:center;margin:15px 0 8px">顾客资料</h4>
         <div class="form-area">
-            <input id="inputName" type="text" placeholder="请输入姓名">
+            <input id="inputName" type="text" placeholder="请输入游戏内名字 不要数字id">
             <input id="inputPhone" type="tel" placeholder="请输入电话号码 方便售后">
-            <textarea id="inputRemark" rows="4" placeholder="备注 / 特别要求"></textarea>
+            <textarea id="inputRemark" rows="4" placeholder="备注 / 特别要求  已实名/未实名"></textarea>
         </div>
 
         <button class="copy-btn" onclick="copyOrderInfo()">复制全部订单信息</button>
@@ -321,8 +321,8 @@ async function copyOrderInfo() {
 
     // 拼接订单文本
     let copyText = "=Zheng Store充值订单=\n";
-    copyText += `顾客姓名：${name || '未填写'}\n`;
-    copyText += `联系电话：${phone || '未填写'}\n`;
+    copyText += `游戏名字：${name || '未填写'}\n`;
+    copyText += `联系方式：${phone || '未填写'}\n`;
     copyText += `备注要求：${remark || '无'}\n`;
     copyText += `付款人姓名：${payName || '未填写'}\n\n`;
     copyText += "订单商品清单：\n";
